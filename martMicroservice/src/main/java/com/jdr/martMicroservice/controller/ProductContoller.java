@@ -1,5 +1,8 @@
 package com.jdr.martMicroservice.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +26,15 @@ public class ProductContoller {
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Object> getProduct(@PathVariable Long id) {
 
-		productService.getProduct(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Optional<Product> product=productService.getProduct(id);
+		return new ResponseEntity<>(product,HttpStatus.OK);
 	}
 
 	@GetMapping("/product")
 	public ResponseEntity<Object> getProducts() {
 
-		productService.getProducts();
-		return new ResponseEntity<>(HttpStatus.OK);
+		List<Product> productList=productService.getProducts();
+		return new ResponseEntity<>(productList,HttpStatus.OK);
 	}
 
 	@PostMapping("/product")

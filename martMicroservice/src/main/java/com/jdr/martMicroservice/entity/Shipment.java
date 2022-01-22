@@ -12,6 +12,6 @@ public class Shipment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	long id;
+	Long id;
 
 }

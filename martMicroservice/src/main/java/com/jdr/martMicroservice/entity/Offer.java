@@ -12,8 +12,11 @@ import javax.persistence.Table;
 public class Offer extends BaseObject {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
+
+	@Column(name = "offerId", nullable = false)
 	private int offerId;
-	
+
 	@Column(name = "offer_code", nullable = false)
 	private String offerCode;
 

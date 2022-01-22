@@ -13,7 +13,7 @@ public class Category extends BaseObject {
 	
 	@Id()
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int category_id;
+	private Long category_id;
 
 	@Column(name = "category_code", nullable = false)
 	private String categoryCode;
