@@ -1,29 +1,39 @@
 package com.jdr.martMicroservice.entity;
 
-
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "role")
-
-public class Role extends BaseObject {
-
-    @Column(name = "ROLE_NAME")
-    private String name;
-
-    @Column(name = "ROLE_DESCRIPTION")
-    private String description;
-
-    @JsonBackReference
-    @ManyToMany(targetEntity = User.class, mappedBy = "roles",
-            cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    private List<User> users;
+public class Role {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
+	
+	public Role() {
+		
+	}
+	
+	public Role(String name) {
+		super();
+		this.name = name;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 }

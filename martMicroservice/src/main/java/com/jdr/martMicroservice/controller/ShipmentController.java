@@ -4,47 +4,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jdr.martMicroservice.entity.Shipment;
 import com.jdr.martMicroservice.service.ShipmentService;
 
 @RestController
-@RequestMapping("/shipment")
 public class ShipmentController {
 
 	@Autowired
 	ShipmentService shipmentService;
 
-	@GetMapping
-	public ResponseEntity<Object> get(@RequestBody Shipment shipment) {
+	@GetMapping("/shipment/{id}")
+	public ResponseEntity<Object> getShipment(@PathVariable Long id) {
 
-		shipmentService.get();
+		shipmentService.getShipment(id);
 		return new ResponseEntity<>(null);
 	}
 
-	@PostMapping
-	public ResponseEntity<Object> add(@RequestBody Shipment shipment) {
+	@GetMapping("/shipment")
+	public ResponseEntity<Object> getAllShipment() {
 
-		shipmentService.add();
+		shipmentService.getShipments();
+		return new ResponseEntity<>(null);
+	}
+
+	@PostMapping("/shipment")
+	public ResponseEntity<Object> addShipment(@RequestBody Shipment shipment) {
+
+		shipmentService.addShipment(shipment);
 
 		return new ResponseEntity<>(null);
 	}
 
-	@PutMapping
-	public ResponseEntity<Object> update(@RequestBody Shipment shipment) {
-		shipmentService.update();
+	@PutMapping("/shipment")
+	public ResponseEntity<Object> updateShipment(@RequestBody Shipment shipment) {
+		shipmentService.updateShipment(shipment);
 
 		return new ResponseEntity<>(null);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<Object> delete(@RequestBody Shipment Shipment) {
-		shipmentService.delete();
+	@DeleteMapping("/shipment/{id}")
+	public ResponseEntity<Object> deleteShipment(@PathVariable Long id) {
+		shipmentService.deleteShipment(id);
 
 		return new ResponseEntity<>(null);
 	}

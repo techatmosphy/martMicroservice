@@ -1,5 +1,8 @@
 package com.jdr.martMicroservice.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,28 +16,30 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryRepository categoryRepository;
 
 	@Override
-	public Category get() {
+	public Optional<Category> getCategory(Long id) {
 
-		categoryRepository.get();
-		return null;
+		return categoryRepository.findById(id);
 	}
 
 	@Override
-	public Category update() {
-		categoryRepository.update();
-		return null;
+	public List<Category> getAllCategory() {
+
+		return categoryRepository.findAll();
 	}
 
 	@Override
-	public Category delete() {
-		categoryRepository.delete();
-		return null;
+	public Category updateCategory(Category category) {
+		return categoryRepository.save(category);
 	}
 
 	@Override
-	public Category add() {
-		categoryRepository.add();
-		return null;
+	public void deleteCategory(Long id) {
+		categoryRepository.deleteById(id);
+	}
+
+	@Override
+	public Category addCategory(Category category) {
+		return categoryRepository.save(category);
 	}
 
 }

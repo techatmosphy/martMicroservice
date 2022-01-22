@@ -1,16 +1,21 @@
 package com.jdr.martMicroservice.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
 import com.jdr.martMicroservice.entity.Shipment;
 public interface ShipmentService {
 
-	Shipment delete();
+	Shipment addShipment(Shipment shipment);
 
-	Shipment update();
+	void deleteShipment(Long id);
 
-	Shipment add();
+	Shipment updateShipment(Shipment shipment);
 
-	Shipment get();
+	Optional<Shipment> getShipment(Long id);
+
+	List<Shipment> getShipments();
+
+
 
 }

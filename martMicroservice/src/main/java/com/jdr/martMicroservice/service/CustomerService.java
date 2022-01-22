@@ -1,15 +1,17 @@
 package com.jdr.martMicroservice.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
 import com.jdr.martMicroservice.entity.Customer;
 public interface CustomerService {
 
-	public Customer delete() ;
+	public void deleteCustomer(Long id) ;
 
-	public Customer update() ;
+	public Customer updateCustomer(Customer customer) ;
 
-	public Customer add() ;
+	public Customer addCustomer(Customer customer) ;
 
-	public Customer get() ;
+	public Optional<Customer> getCustomer(Long id) ;
+	public List<Customer> getCustomers() ;
 }

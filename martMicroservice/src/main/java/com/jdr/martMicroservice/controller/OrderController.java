@@ -4,46 +4,51 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jdr.martMicroservice.entity.Order;
 import com.jdr.martMicroservice.service.OrderService;
 
 @RestController
-@RequestMapping("/order")
 public class OrderController {
 
 	@Autowired
 	OrderService orderService;
 
-	@GetMapping()
-	public ResponseEntity<Object> get(@RequestBody Order order) {
-		orderService.get();
+	@GetMapping("/order/{id}")
+	public ResponseEntity<Object> getOrder(@PathVariable Long id) {
+		orderService.getOrder(id);
 		return new ResponseEntity<>(null);
 	}
 
-	@PostMapping
-	public ResponseEntity<Object> add(@RequestBody Order order) {
-
-		orderService.add();
+	@GetMapping("/order")
+	public ResponseEntity<Object> getOrders() {
+		orderService.getOrders();
 		return new ResponseEntity<>(null);
 	}
 
-	@PutMapping
-	public ResponseEntity<Object> update(@RequestBody Order order) {
+	@PostMapping("/order")
+	public ResponseEntity<Object> addOrder(@RequestBody Order order) {
 
-		orderService.update();
+		orderService.addOrder(order);
 		return new ResponseEntity<>(null);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<Object> delete(@RequestBody Order order) {
+	@PutMapping("/order")
+	public ResponseEntity<Object> updateOrder(@RequestBody Order order) {
 
-		orderService.delete();
+		orderService.updateOrder(order);
+		return new ResponseEntity<>(null);
+	}
+
+	@DeleteMapping("/order/{id}")
+	public ResponseEntity<Object> deleteOrder(@PathVariable Long id) {
+
+		orderService.deleteOrder(id);
 		return new ResponseEntity<>(null);
 	}
 }

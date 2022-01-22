@@ -1,20 +1,21 @@
 package com.jdr.martMicroservice.entity;
 
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "ADDRESS")
 public class Address extends BaseObject {
-
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	
     @Column(name = "ADDRESS1", nullable = false)
     private String address1;
 
@@ -35,10 +36,4 @@ public class Address extends BaseObject {
 
     @Column(name = "MOBILE", nullable = false)
     private String mobile;
-
-
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER_ID")
-    private User user;
 }

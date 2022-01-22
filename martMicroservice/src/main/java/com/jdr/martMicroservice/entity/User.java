@@ -1,44 +1,128 @@
 package com.jdr.martMicroservice.entity;
 
-import javax.persistence.*;
-import java.util.List;
+import java.util.Collection;
 
-//@Getter
-//@Setter
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 @Entity
-@Table(name = "user")
-public class User extends BaseObject {
+@Table(name =  "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+public class User {
+	
+	@Id
+	@GeneratedValue(strategy =  GenerationType.IDENTITY)
+	private long id;
+	
+	@Column(name = "first_name")
+	private String firstName;
+	
+	@Column(name = "last_name")
+	private String lastName;
+	
+	private String email;
+	
+	private String password;
 
-    @Column(name = "emailId", nullable = false)
-    private String emailId;
+	private String panNumber;
+	private String mobileNumber;
+	private String aadharNumber;
+	public String getPanNumber() {
+		return panNumber;
+	}
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+	public void setPanNumber(String panNumber) {
+		this.panNumber = panNumber;
+	}
 
-    @Column(name = "password")
-    private String password;
+	public String getMobileNumber() {
+		return mobileNumber;
+	}
 
-    @Column(name = "middle_name", nullable = true)
-    private String middleName;
+	public void setMobileNumber(String mobileNumber) {
+		this.mobileNumber = mobileNumber;
+	}
 
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+	public String getAadharNumber() {
+		return aadharNumber;
+	}
 
-    @Column(name = "mobile_no", nullable = false)
-    private String mobileNo;
+	public void setAadharNumber(String aadharNumber) {
+		this.aadharNumber = aadharNumber;
+	}
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "users_roles",
+			joinColumns = @JoinColumn(
+		            name = "user_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(
+				            name = "role_id", referencedColumnName = "id"))
+	
+	private Collection<Role> roles;
+	
+	public User() {
+		
+	}
+	
+	
+	public User(String firstName, String lastName, String email, String aadharNumber,String mobileNumber,
+			String panNumber, String password, Collection<Role> roles) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.aadharNumber = aadharNumber;
+		this.mobileNumber = mobileNumber;
+		this.panNumber = panNumber;
+		this.password = password;
+		this.roles = roles;
+	}
 
-    @Column(name = "user_type", nullable = false)
-    private String userType;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Address> addressList;
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
 
-   @ManyToMany(targetEntity = Role.class,cascade =
-            {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
-    @JoinTable(
-            name="user_role",
-            joinColumns=
-            @JoinColumn( name="user_id", referencedColumnName="id"),
-            inverseJoinColumns=@JoinColumn(name="role_id", referencedColumnName="id"))
-    private List<Role> roles;
 }
