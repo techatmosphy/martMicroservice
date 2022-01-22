@@ -1,13 +1,10 @@
 package com.jdr.martMicroservice.repo;
 
-public interface OrderRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-	void delete();
-
-	void update();
-
-	void add();
-
-	void get();
+import com.jdr.martMicroservice.entity.Order;
+@Repository
+public interface OrderRepository extends JpaRepository<Order, Long>{
 
 }

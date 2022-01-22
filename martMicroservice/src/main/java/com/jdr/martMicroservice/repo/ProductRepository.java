@@ -1,13 +1,10 @@
 package com.jdr.martMicroservice.repo;
 
-public interface ProductRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-	void get();
-
-	void add();
-
-	void update();
-
-	void delete();
+import com.jdr.martMicroservice.entity.Product;
+@Repository
+public interface ProductRepository extends JpaRepository<Product, Long>{
 
 }

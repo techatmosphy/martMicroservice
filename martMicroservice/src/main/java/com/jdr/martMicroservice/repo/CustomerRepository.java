@@ -1,13 +1,11 @@
 package com.jdr.martMicroservice.repo;
 
-public interface CustomerRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-	void get();
+import com.jdr.martMicroservice.entity.Customer;
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-	void add();
-
-	void update();
-
-	void delete();
 
 }

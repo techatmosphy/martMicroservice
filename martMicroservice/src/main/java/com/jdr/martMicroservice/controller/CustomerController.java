@@ -4,45 +4,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jdr.martMicroservice.entity.Customer;
 import com.jdr.martMicroservice.service.CustomerService;
 
 @RestController
-@RequestMapping("/customer")
 public class CustomerController {
 
-	@Autowired CustomerService customerService;
-	@GetMapping
-	public ResponseEntity<Object> get(@RequestBody Customer customer) {
-		
-		customerService.get();
+	@Autowired
+	CustomerService customerService;
+
+	@GetMapping("/customer/{id}")
+	public ResponseEntity<Object> getCustomer(@PathVariable Long id) {
+
+		customerService.getCustomer(id);
 		return new ResponseEntity<>(null);
 	}
 
-	@PostMapping
-	public ResponseEntity<Object> add(@RequestBody Customer customer) {
+	@GetMapping("/customer")
+	public ResponseEntity<Object> getCustomers() {
 
-		customerService.add();
+		customerService.getCustomers();
 		return new ResponseEntity<>(null);
 	}
 
-	@PutMapping
-	public ResponseEntity<Object> update(@RequestBody Customer customer) {
+	@PostMapping("/customer")
+	public ResponseEntity<Object> addCustomer(@RequestBody Customer customer) {
 
-		customerService.update();
+		customerService.addCustomer(customer);
 		return new ResponseEntity<>(null);
 	}
 
-	@DeleteMapping
-	public ResponseEntity<Object> delete(@RequestBody Customer customer) {
+	@PutMapping("/customer")
+	public ResponseEntity<Object> updateCustomer(@RequestBody Customer customer) {
 
-		customerService.delete();
+		customerService.updateCustomer(customer);
+		return new ResponseEntity<>(null);
+	}
+
+	@DeleteMapping("/customer/{id}")
+	public ResponseEntity<Object> deleteCustomer(@PathVariable Long id) {
+
+		customerService.deleteCustomer(id);
 		return new ResponseEntity<>(null);
 	}
 }

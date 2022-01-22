@@ -1,14 +1,20 @@
 package com.jdr.martMicroservice.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.jdr.martMicroservice.entity.Product;
 public interface ProductService {
 
-	Product delete();
+	void deleteProduct(Long id);
 
-	Product add();
+	Product addProduct(Product product);
 
-	Product get();
+	Product updateProduct(Product product);
 
-	Product update();
+	List<Product> getProducts();
 
+	Optional<Product> getProduct(Long id);
+
+	
 }

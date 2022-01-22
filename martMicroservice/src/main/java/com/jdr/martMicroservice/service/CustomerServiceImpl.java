@@ -1,36 +1,42 @@
 package com.jdr.martMicroservice.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jdr.martMicroservice.entity.Customer;
 import com.jdr.martMicroservice.repo.CustomerRepository;
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-	@Autowired CustomerRepository CustomerRepository;
+	@Autowired
+	CustomerRepository CustomerRepository;
+
 	@Override
-	public Customer delete() {
-		CustomerRepository.delete();
-		return null;
+	public void deleteCustomer(Long id) {
+		CustomerRepository.deleteById(id);
 	}
 
 	@Override
-	public Customer update() {
-		CustomerRepository.update();
-		return null;
+	public Customer updateCustomer(Customer customer) {
+		return CustomerRepository.save(customer);
 	}
 
 	@Override
-	public Customer add() {
-		CustomerRepository.add();
-		return null;
+	public Customer addCustomer(Customer customer) {
+		return CustomerRepository.save(customer);
 	}
 
 	@Override
-	public Customer get() {
-		CustomerRepository.get();
-		return null;
+	public Optional<Customer> getCustomer(Long id) {
+		return CustomerRepository.findById(id);
 	}
 
+	@Override
+	public List<Customer> getCustomers() {
+		return CustomerRepository.findAll();
+	}
 }
