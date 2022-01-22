@@ -21,7 +21,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -37,7 +37,7 @@ public class User {
 	private String mobileNumber;
 	private String aadharNumber;
 	public String getPanNumber() {
-		return panNumber;
+	return panNumber;
 	}
 
 	public void setPanNumber(String panNumber) {

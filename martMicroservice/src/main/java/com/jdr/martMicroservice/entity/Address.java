@@ -14,7 +14,7 @@ public class Address extends BaseObject {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
     @Column(name = "ADDRESS1", nullable = false)
     private String address1;

@@ -14,7 +14,7 @@ public class Tax extends BaseObject{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 
     @Column(name = "hsn_code", nullable = false)
     private String hsnCode;
