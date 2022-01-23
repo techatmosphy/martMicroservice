@@ -26,15 +26,15 @@ public class ProductContoller {
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Object> getProduct(@PathVariable Long id) {
 
-		Optional<Product> product=productService.getProduct(id);
-		return new ResponseEntity<>(product,HttpStatus.OK);
+		Optional<Product> product = productService.getProduct(id);
+		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
 	@GetMapping("/product")
 	public ResponseEntity<Object> getProducts() {
 
-		List<Product> productList=productService.getProducts();
-		return new ResponseEntity<>(productList,HttpStatus.OK);
+		List<Product> productList = productService.getProducts();
+		return new ResponseEntity<>(productList, HttpStatus.OK);
 	}
 
 	@PostMapping("/product")

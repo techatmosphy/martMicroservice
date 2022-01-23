@@ -1,5 +1,8 @@
 package com.jdr.martMicroservice.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,23 +25,22 @@ public class CategoryController {
 
 	@GetMapping("/category/{id}")
 	public ResponseEntity<Object> getCategory(@PathVariable Long id) {
-
-		categoryService.getCategory(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Optional<Category> category = categoryService.getCategory(id);
+		return new ResponseEntity<>(category, HttpStatus.OK);
 	}
 
 	@GetMapping("/category")
 	public ResponseEntity<Object> getAllCategory() {
 
-		categoryService.getAllCategory();
-		return new ResponseEntity<>(HttpStatus.OK);
+		List<Category> category = categoryService.getAllCategory();
+		return new ResponseEntity<>(category,HttpStatus.OK);
 	}
 
 	@PostMapping("/category")
 	public ResponseEntity<Object> addCategory(@RequestBody Category category) {
 
-		categoryService.addCategory(category);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Category category1 =categoryService.addCategory(category);
+		return new ResponseEntity<>(category1,HttpStatus.OK);
 	}
 
 	@PutMapping

@@ -21,7 +21,7 @@ public class CustomerController {
 
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<Object> getCustomer(@PathVariable Long id) {
-
+		
 		customerService.getCustomer(id);
 		return new ResponseEntity<>(null);
 	}
