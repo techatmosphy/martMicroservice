@@ -17,30 +17,6 @@ import javax.persistence.Table;
 @Table(name = "product")
 public class Product extends BaseObject {
 
-	public Product() {
-	}
-
-	public Product(Long productId, String name, String description, Double price, int quantity, int gtin, int offerId,
-			String brand, Category category, Date createdDate, Date updatedDate, Date validFrom, Date validTill,
-			String createdBy, String lastUpdatedBy) {
-		super();
-		this.productId = productId;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.quantity = quantity;
-		this.gtin = gtin;
-		this.offerId = offerId;
-		this.brand = brand;
-		this.category = category;
-		this.createdDate = createdDate;
-		this.updatedDate = updatedDate;
-		this.validFrom = validFrom;
-		this.validTill = validTill;
-		this.createdBy = createdBy;
-		this.lastUpdatedBy = lastUpdatedBy;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long productId;
@@ -73,7 +49,7 @@ public class Product extends BaseObject {
 //    @JoinColumn(name = "tax_id")
 //    private Tax tax;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "category_id")
 	private Category category;
 
@@ -95,6 +71,32 @@ public class Product extends BaseObject {
 	@Column(name = "lastUpdatedBy", nullable = true)
 	private String lastUpdatedBy;
 
+	
+	public Product() {
+	}
+
+	public Product(Long productId, String name, String description, Double price, int quantity, int gtin, int offerId,
+			String brand, Category category, Date createdDate, Date updatedDate, Date validFrom, Date validTill,
+			String createdBy, String lastUpdatedBy) {
+		super();
+		this.productId = productId;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.quantity = quantity;
+		this.gtin = gtin;
+		this.offerId = offerId;
+		this.brand = brand;
+		this.category = category;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
+		this.validFrom = validFrom;
+		this.validTill = validTill;
+		this.createdBy = createdBy;
+		this.lastUpdatedBy = lastUpdatedBy;
+	}
+	
+	
 	public Long getProductId() {
 		return productId;
 	}

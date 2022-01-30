@@ -16,14 +16,12 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryRepository categoryRepository;
 
 	@Override
-	public Optional<Category> getCategory(Long id) {
-
-		return categoryRepository.findById(id);
+	public Category getCategory(Long id) {
+		return categoryRepository.findById(id).orElse(null);
 	}
 
 	@Override
 	public List<Category> getAllCategory() {
-
 		return categoryRepository.findAll();
 	}
 
@@ -34,7 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public void deleteCategory(Long id) {
-		categoryRepository.deleteById(id);
+		 categoryRepository.deleteById(id);
 	}
 
 	@Override

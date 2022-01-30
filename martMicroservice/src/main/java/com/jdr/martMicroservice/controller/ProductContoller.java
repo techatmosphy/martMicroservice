@@ -26,29 +26,29 @@ public class ProductContoller {
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Object> getProduct(@PathVariable Long id) {
 
-		Optional<Product> product = productService.getProduct(id);
-		return new ResponseEntity<>(product, HttpStatus.OK);
+		Optional<Product> product=productService.getProduct(id);
+		return new ResponseEntity<>(product,HttpStatus.OK);
 	}
 
 	@GetMapping("/product")
-	public ResponseEntity<Object> getProducts() {
+	public ResponseEntity<List<Product>> getProducts() {
 
-		List<Product> productList = productService.getProducts();
-		return new ResponseEntity<>(productList, HttpStatus.OK);
+		List<Product> productList=productService.getProducts();
+		return new ResponseEntity<>(productList,HttpStatus.OK);
 	}
 
 	@PostMapping("/product")
-	public ResponseEntity<Object> addProduct(@RequestBody Product product) {
+	public ResponseEntity<Product> addProduct(@RequestBody Product theProduct) {
 
-		productService.addProduct(product);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Product product = productService.addProduct(theProduct);
+		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
 	@PutMapping("/product")
-	public ResponseEntity<Object> updateProduct(@RequestBody Product product) {
+	public ResponseEntity<Product> updateProduct(@RequestBody Product theProduct) {
 
-		productService.updateProduct(product);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Product product = productService.updateProduct(theProduct);
+		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/product/{id}")

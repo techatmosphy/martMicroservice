@@ -1,7 +1,6 @@
 package com.jdr.martMicroservice.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,30 +23,31 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	@GetMapping("/category/{id}")
-	public ResponseEntity<Object> getCategory(@PathVariable Long id) {
-		Optional<Category> category = categoryService.getCategory(id);
-		return new ResponseEntity<>(category, HttpStatus.OK);
+	public ResponseEntity<Category> getCategory(@PathVariable Long id) {
+
+		Category theCategory = categoryService.getCategory(id);
+		return new ResponseEntity<>(theCategory, HttpStatus.OK);
 	}
 
 	@GetMapping("/category")
-	public ResponseEntity<Object> getAllCategory() {
-
-		List<Category> category = categoryService.getAllCategory();
-		return new ResponseEntity<>(category,HttpStatus.OK);
+	public ResponseEntity<List<Category>> getAllCategory() {
+		
+		List<Category> categoryList = categoryService.getAllCategory();		
+		return new ResponseEntity<>(categoryList, HttpStatus.OK);
 	}
 
 	@PostMapping("/category")
-	public ResponseEntity<Object> addCategory(@RequestBody Category category) {
+	public ResponseEntity<Category> addCategory(@RequestBody Category category) {
 
-		Category category1 =categoryService.addCategory(category);
-		return new ResponseEntity<>(category1,HttpStatus.OK);
+		Category theCategory = categoryService.addCategory(category);
+		return new ResponseEntity<>(theCategory , HttpStatus.OK);
 	}
 
-	@PutMapping
-	public ResponseEntity<Object> updateCategory(@RequestBody Category category) {
+	@PutMapping("/category")
+	public ResponseEntity<Category> updateCategory(@RequestBody Category category) {
 
-		categoryService.updateCategory(category);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Category theCategory = categoryService.updateCategory(category);
+		return new ResponseEntity<>(theCategory, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/category/{id}")
