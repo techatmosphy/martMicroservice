@@ -16,9 +16,9 @@ import javax.persistence.Table;
 public class Customer extends BaseObject {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long customerId;
-	
+
 	@Column(name = "full_name", nullable = false)
 	private String fullName;
 
@@ -28,4 +28,48 @@ public class Customer extends BaseObject {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	public Customer() {
+	}
+
+	public Customer(Long customerId, String fullName, String customerCode, User user) {
+		super();
+		this.customerId = customerId;
+		this.fullName = fullName;
+		this.customerCode = customerCode;
+		this.user = user;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getCustomerCode() {
+		return customerCode;
+	}
+
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 }
