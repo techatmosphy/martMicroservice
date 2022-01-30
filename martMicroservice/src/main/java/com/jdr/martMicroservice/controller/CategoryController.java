@@ -1,5 +1,7 @@
 package com.jdr.martMicroservice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,31 +23,31 @@ public class CategoryController {
 	private CategoryService categoryService;
 
 	@GetMapping("/category/{id}")
-	public ResponseEntity<Object> getCategory(@PathVariable Long id) {
+	public ResponseEntity<Category> getCategory(@PathVariable Long id) {
 
-		categoryService.getCategory(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Category theCategory = categoryService.getCategory(id);
+		return new ResponseEntity<>(theCategory, HttpStatus.OK);
 	}
 
 	@GetMapping("/category")
-	public ResponseEntity<Object> getAllCategory() {
-
-		categoryService.getAllCategory();
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<List<Category>> getAllCategory() {
+		
+		List<Category> categoryList = categoryService.getAllCategory();		
+		return new ResponseEntity<>(categoryList, HttpStatus.OK);
 	}
 
 	@PostMapping("/category")
-	public ResponseEntity<Object> addCategory(@RequestBody Category category) {
+	public ResponseEntity<Category> addCategory(@RequestBody Category category) {
 
-		categoryService.addCategory(category);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Category theCategory = categoryService.addCategory(category);
+		return new ResponseEntity<>(theCategory , HttpStatus.OK);
 	}
 
-	@PutMapping
-	public ResponseEntity<Object> updateCategory(@RequestBody Category category) {
+	@PutMapping("/category")
+	public ResponseEntity<Category> updateCategory(@RequestBody Category category) {
 
-		categoryService.updateCategory(category);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Category theCategory = categoryService.updateCategory(category);
+		return new ResponseEntity<>(theCategory, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/category/{id}")

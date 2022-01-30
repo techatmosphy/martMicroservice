@@ -7,7 +7,7 @@ import com.jdr.martMicroservice.entity.Category;
 
 public interface CategoryService {
 
-	public Optional<Category> getCategory(Long id);
+	public Category getCategory(Long id);
 
 	public List<Category> getAllCategory();
 

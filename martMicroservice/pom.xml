@@ -14,8 +14,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>martMicroservice</name>
 	<description>JDR Mart Microservice</description>
+
 	<properties>
 		<java.version>8</java.version>
+<!-- 		<start-class>com.jdr.martMicroservice.MartMicroserviceApplication</start-class> -->
+		<activeProfile>development</activeProfile>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -57,14 +60,39 @@
 		<!-- <scope>test</scope> -->
 		<!-- </dependency> -->
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+	<profiles>
+		<profile>
+			<id>development</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<fork>true</fork>
+							<mainClass>com.jdr.martMicroservice.MartMicroserviceApplication</mainClass>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>repackage</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+				<resources>
+					<resource>
+						<directory>src/main/resources
+				</directory>
+						<filtering>true</filtering>
+					</resource>
+				</resources>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
