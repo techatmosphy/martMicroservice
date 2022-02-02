@@ -2,6 +2,7 @@ package com.jdr.martMicroservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import com.jdr.martMicroservice.entity.Shipment;
 import com.jdr.martMicroservice.service.ShipmentService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ShipmentController {
 
 	@Autowired
