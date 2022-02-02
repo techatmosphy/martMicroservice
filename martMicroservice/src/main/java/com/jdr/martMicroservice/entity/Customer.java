@@ -40,32 +40,32 @@ public class Customer extends BaseObject {
 		this.user = user;
 	}
 
-	public Long getCustomerId() {
-		return customerId;
+	public String getCustomerCode() {
+		return customerCode;
 	}
 
-	public void setCustomerId(Long customerId) {
-		this.customerId = customerId;
+	public Long getCustomerId() {
+		return customerId;
 	}
 
 	public String getFullName() {
 		return fullName;
 	}
 
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
-
-	public String getCustomerCode() {
-		return customerCode;
+	public User getUser() {
+		return user;
 	}
 
 	public void setCustomerCode(String customerCode) {
 		this.customerCode = customerCode;
 	}
 
-	public User getUser() {
-		return user;
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public void setUser(User user) {

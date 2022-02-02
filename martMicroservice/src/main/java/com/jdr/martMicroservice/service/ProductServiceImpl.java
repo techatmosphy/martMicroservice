@@ -18,18 +18,13 @@ public class ProductServiceImpl implements ProductService {
 	ProductRepository productRepository;
 
 	@Override
-	public void deleteProduct(@PathVariable Long id) {
-		productRepository.deleteById(id);
-	}
-
-	@Override
-	public Product updateProduct(@RequestBody Product product) {
-		return productRepository.save(product);
-	}
-
-	@Override
 	public Product addProduct(@RequestBody Product product) {
 		return productRepository.save(product);
+	}
+
+	@Override
+	public void deleteProduct(@PathVariable Long id) {
+		productRepository.deleteById(id);
 	}
 
 	@Override
@@ -42,6 +37,11 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getProducts() {
 		return productRepository.findAll();
 
+	}
+
+	@Override
+	public Product updateProduct(@RequestBody Product product) {
+		return productRepository.save(product);
 	}
 
 }

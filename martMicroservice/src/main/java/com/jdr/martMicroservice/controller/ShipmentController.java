@@ -21,10 +21,18 @@ public class ShipmentController {
 	@Autowired
 	ShipmentService shipmentService;
 
-	@GetMapping("/shipment/{id}")
-	public ResponseEntity<Object> getShipment(@PathVariable Long id) {
+	@PostMapping("/shipment")
+	public ResponseEntity<Object> addShipment(@RequestBody Shipment shipment) {
 
-		shipmentService.getShipment(id);
+		shipmentService.addShipment(shipment);
+
+		return new ResponseEntity<>(null);
+	}
+
+	@DeleteMapping("/shipment/{id}")
+	public ResponseEntity<Object> deleteShipment(@PathVariable Long id) {
+		shipmentService.deleteShipment(id);
+
 		return new ResponseEntity<>(null);
 	}
 
@@ -35,24 +43,16 @@ public class ShipmentController {
 		return new ResponseEntity<>(null);
 	}
 
-	@PostMapping("/shipment")
-	public ResponseEntity<Object> addShipment(@RequestBody Shipment shipment) {
+	@GetMapping("/shipment/{id}")
+	public ResponseEntity<Object> getShipment(@PathVariable Long id) {
 
-		shipmentService.addShipment(shipment);
-
+		shipmentService.getShipment(id);
 		return new ResponseEntity<>(null);
 	}
 
 	@PutMapping("/shipment")
 	public ResponseEntity<Object> updateShipment(@RequestBody Shipment shipment) {
 		shipmentService.updateShipment(shipment);
-
-		return new ResponseEntity<>(null);
-	}
-
-	@DeleteMapping("/shipment/{id}")
-	public ResponseEntity<Object> deleteShipment(@PathVariable Long id) {
-		shipmentService.deleteShipment(id);
 
 		return new ResponseEntity<>(null);
 	}

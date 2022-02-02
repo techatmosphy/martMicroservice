@@ -16,19 +16,7 @@ public class CategoryServiceImpl implements CategoryService {
 	CategoryRepository categoryRepository;
 
 	@Override
-	public Optional<Category> getCategory(Long id) {
-
-		return categoryRepository.findById(id);
-	}
-
-	@Override
-	public List<Category> getAllCategory() {
-
-		return categoryRepository.findAll();
-	}
-
-	@Override
-	public Category updateCategory(Category category) {
+	public Category addCategory(Category category) {
 		return categoryRepository.save(category);
 	}
 
@@ -38,7 +26,19 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category addCategory(Category category) {
+	public List<Category> getAllCategory() {
+
+		return categoryRepository.findAll();
+	}
+
+	@Override
+	public Optional<Category> getCategory(Long id) {
+
+		return categoryRepository.findById(id);
+	}
+
+	@Override
+	public Category updateCategory(Category category) {
 		return categoryRepository.save(category);
 	}
 

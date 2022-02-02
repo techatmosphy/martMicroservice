@@ -21,6 +21,20 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 
+	@PostMapping("/order")
+	public ResponseEntity<Object> addOrder(@RequestBody Order order) {
+
+		orderService.addOrder(order);
+		return new ResponseEntity<>(null);
+	}
+
+	@DeleteMapping("/order/{id}")
+	public ResponseEntity<Object> deleteOrder(@PathVariable Long id) {
+
+		orderService.deleteOrder(id);
+		return new ResponseEntity<>(null);
+	}
+
 	@GetMapping("/order/{id}")
 	public ResponseEntity<Object> getOrder(@PathVariable Long id) {
 		orderService.getOrder(id);
@@ -33,24 +47,10 @@ public class OrderController {
 		return new ResponseEntity<>(null);
 	}
 
-	@PostMapping("/order")
-	public ResponseEntity<Object> addOrder(@RequestBody Order order) {
-
-		orderService.addOrder(order);
-		return new ResponseEntity<>(null);
-	}
-
 	@PutMapping("/order")
 	public ResponseEntity<Object> updateOrder(@RequestBody Order order) {
 
 		orderService.updateOrder(order);
-		return new ResponseEntity<>(null);
-	}
-
-	@DeleteMapping("/order/{id}")
-	public ResponseEntity<Object> deleteOrder(@PathVariable Long id) {
-
-		orderService.deleteOrder(id);
 		return new ResponseEntity<>(null);
 	}
 }

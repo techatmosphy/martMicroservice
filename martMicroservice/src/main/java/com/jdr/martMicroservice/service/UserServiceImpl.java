@@ -15,28 +15,28 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired UserRepository userRepository;
 	@Override
-	public void deleteUser(@PathVariable Long id) {
-		userRepository.deleteById(id);
-	}
-
-	@Override
-	public User updateUser(@RequestBody User user) {
-		return userRepository.save(user);
-	}
-
-	@Override
 	public User addUser(@RequestBody User user ) {
 		return userRepository.save(user);
+	}
+
+	@Override
+	public void deleteUser(@PathVariable Long id) {
+		userRepository.deleteById(id);
 	}
 
 	@Override
 	public Optional<User> getUser(Long id) {
 		return userRepository.findById(id);
 	}
-	
+
 	@Override
 	public List<User> getUsers() {
 		return userRepository.findAll();
+	}
+	
+	@Override
+	public User updateUser(@RequestBody User user) {
+		return userRepository.save(user);
 	}
 
 }

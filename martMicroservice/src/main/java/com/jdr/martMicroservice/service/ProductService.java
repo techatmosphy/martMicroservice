@@ -6,15 +6,15 @@ import java.util.Optional;
 import com.jdr.martMicroservice.entity.Product;
 public interface ProductService {
 
-	void deleteProduct(Long id);
-
 	Product addProduct(Product product);
 
-	Product updateProduct(Product product);
+	void deleteProduct(Long id);
+
+	Optional<Product> getProduct(Long id);
 
 	List<Product> getProducts();
 
-	Optional<Product> getProduct(Long id);
+	Product updateProduct(Product product);
 
 	
 }

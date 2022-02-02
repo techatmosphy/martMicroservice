@@ -36,70 +36,6 @@ public class Address extends BaseObject {
 	@Column(name = "MOBILE", nullable = false)
 	private String mobile;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getAddress1() {
-		return address1;
-	}
-
-	public void setAddress1(String address1) {
-		this.address1 = address1;
-	}
-
-	public String getAddress2() {
-		return address2;
-	}
-
-	public void setAddress2(String address2) {
-		this.address2 = address2;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getLandmark() {
-		return landmark;
-	}
-
-	public void setLandmark(String landmark) {
-		this.landmark = landmark;
-	}
-
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
 	public Address() {
 	}
 
@@ -114,5 +50,69 @@ public class Address extends BaseObject {
 		this.country = country;
 		this.landmark = landmark;
 		this.mobile = mobile;
+	}
+
+	public String getAddress1() {
+		return address1;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getLandmark() {
+		return landmark;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 }

@@ -25,6 +25,20 @@ public class ProductContoller {
 	@Autowired
 	ProductService productService;
 
+	@PostMapping("/product")
+	public ResponseEntity<Object> addProduct(@RequestBody Product product) {
+
+		productService.addProduct(product);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/product/{id}")
+	public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
+
+		productService.deleteProduct(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
 	@GetMapping("/product/{id}")
 	public ResponseEntity<Object> getProduct(@PathVariable Long id) {
 
@@ -39,24 +53,10 @@ public class ProductContoller {
 		return new ResponseEntity<>(productList,HttpStatus.OK);
 	}
 
-	@PostMapping("/product")
-	public ResponseEntity<Object> addProduct(@RequestBody Product product) {
-
-		productService.addProduct(product);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
 	@PutMapping("/product")
 	public ResponseEntity<Object> updateProduct(@RequestBody Product product) {
 
 		productService.updateProduct(product);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
-	@DeleteMapping("/product/{id}")
-	public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
-
-		productService.deleteProduct(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }

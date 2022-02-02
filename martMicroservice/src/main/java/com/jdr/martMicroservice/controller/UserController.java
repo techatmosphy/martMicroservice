@@ -21,6 +21,20 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@PostMapping("/user")
+	public ResponseEntity<Object> addUser(@RequestBody User user) {
+
+		userService.addUser(user);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
+
+		userService.deleteUser(id);
+		return new ResponseEntity<>(null);
+	}
+
 	@GetMapping("/user/{id}")
 	public ResponseEntity<Object> getUser(@PathVariable Long id) {
 
@@ -35,24 +49,10 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@PostMapping("/user")
-	public ResponseEntity<Object> addUser(@RequestBody User user) {
-
-		userService.addUser(user);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
 	@PutMapping("/user")
 	public ResponseEntity<Object> updateUser(@RequestBody User user) {
 
 		userService.updateUser(user);
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
-	@DeleteMapping("/user/{id}")
-	public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
-
-		userService.deleteUser(id);
-		return new ResponseEntity<>(null);
 	}
 }

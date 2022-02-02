@@ -21,6 +21,20 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 
+	@PostMapping("/customer")
+	public ResponseEntity<Object> addCustomer(@RequestBody Customer customer) {
+
+		customerService.addCustomer(customer);
+		return new ResponseEntity<>(null);
+	}
+
+	@DeleteMapping("/customer/{id}")
+	public ResponseEntity<Object> deleteCustomer(@PathVariable Long id) {
+
+		customerService.deleteCustomer(id);
+		return new ResponseEntity<>(null);
+	}
+
 	@GetMapping("/customer/{id}")
 	public ResponseEntity<Object> getCustomer(@PathVariable Long id) {
 
@@ -35,24 +49,10 @@ public class CustomerController {
 		return new ResponseEntity<>(null);
 	}
 
-	@PostMapping("/customer")
-	public ResponseEntity<Object> addCustomer(@RequestBody Customer customer) {
-
-		customerService.addCustomer(customer);
-		return new ResponseEntity<>(null);
-	}
-
 	@PutMapping("/customer")
 	public ResponseEntity<Object> updateCustomer(@RequestBody Customer customer) {
 
 		customerService.updateCustomer(customer);
-		return new ResponseEntity<>(null);
-	}
-
-	@DeleteMapping("/customer/{id}")
-	public ResponseEntity<Object> deleteCustomer(@PathVariable Long id) {
-
-		customerService.deleteCustomer(id);
 		return new ResponseEntity<>(null);
 	}
 }

@@ -24,11 +24,18 @@ public class CategoryController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@GetMapping("/category/{id}")
-	public ResponseEntity<Object> getCategory(@PathVariable Long id) {
+	@PostMapping("/category")
+	public ResponseEntity<Object> addCategory(@RequestBody Category category) {
 
-		Optional<Category> category=categoryService.getCategory(id);
-		return new ResponseEntity<>(category,HttpStatus.OK);
+		Category RespCategory=categoryService.addCategory(category);
+		return new ResponseEntity<>(RespCategory,HttpStatus.OK);
+	}
+
+	@DeleteMapping("/category/{id}")
+	public ResponseEntity<Object> deleteCategory(@PathVariable Long id) {
+
+		categoryService.deleteCategory(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@GetMapping("/category")
@@ -38,11 +45,11 @@ public class CategoryController {
 		return new ResponseEntity<>(category,HttpStatus.OK);
 	}
 
-	@PostMapping("/category")
-	public ResponseEntity<Object> addCategory(@RequestBody Category category) {
+	@GetMapping("/category/{id}")
+	public ResponseEntity<Object> getCategory(@PathVariable Long id) {
 
-		Category RespCategory=categoryService.addCategory(category);
-		return new ResponseEntity<>(RespCategory,HttpStatus.OK);
+		Optional<Category> category=categoryService.getCategory(id);
+		return new ResponseEntity<>(category,HttpStatus.OK);
 	}
 
 	@PutMapping
@@ -50,12 +57,5 @@ public class CategoryController {
 
 		Category RespCategory=categoryService.updateCategory(category);
 		return new ResponseEntity<>(RespCategory,HttpStatus.OK);
-	}
-
-	@DeleteMapping("/category/{id}")
-	public ResponseEntity<Object> deleteCategory(@PathVariable Long id) {
-
-		categoryService.deleteCategory(id);
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
