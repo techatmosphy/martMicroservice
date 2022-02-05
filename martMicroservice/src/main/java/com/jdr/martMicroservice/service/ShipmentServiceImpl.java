@@ -26,11 +26,6 @@ public class ShipmentServiceImpl implements ShipmentService {
 	}
 
 	@Override
-	public Shipment updateShipment(Shipment shipment) {
-		return shipmentRepository.save(shipment);
-	}
-
-	@Override
 	public Optional<Shipment> getShipment(Long id) {
 		return shipmentRepository.findById(id);
 	}
@@ -38,5 +33,10 @@ public class ShipmentServiceImpl implements ShipmentService {
 	@Override
 	public List<Shipment> getShipments() {
 		return shipmentRepository.findAll();
+	}
+
+	@Override
+	public Shipment updateShipment(Shipment shipment) {
+		return shipmentRepository.save(shipment);
 	}
 }

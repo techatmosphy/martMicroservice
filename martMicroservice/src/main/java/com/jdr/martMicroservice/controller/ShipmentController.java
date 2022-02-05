@@ -2,6 +2,7 @@ package com.jdr.martMicroservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,15 +15,24 @@ import com.jdr.martMicroservice.entity.Shipment;
 import com.jdr.martMicroservice.service.ShipmentService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ShipmentController {
 
 	@Autowired
 	ShipmentService shipmentService;
 
-	@GetMapping("/shipment/{id}")
-	public ResponseEntity<Object> getShipment(@PathVariable Long id) {
+	@PostMapping("/shipment")
+	public ResponseEntity<Object> addShipment(@RequestBody Shipment shipment) {
 
-		shipmentService.getShipment(id);
+		shipmentService.addShipment(shipment);
+
+		return new ResponseEntity<>(null);
+	}
+
+	@DeleteMapping("/shipment/{id}")
+	public ResponseEntity<Object> deleteShipment(@PathVariable Long id) {
+		shipmentService.deleteShipment(id);
+
 		return new ResponseEntity<>(null);
 	}
 
@@ -33,24 +43,16 @@ public class ShipmentController {
 		return new ResponseEntity<>(null);
 	}
 
-	@PostMapping("/shipment")
-	public ResponseEntity<Object> addShipment(@RequestBody Shipment shipment) {
+	@GetMapping("/shipment/{id}")
+	public ResponseEntity<Object> getShipment(@PathVariable Long id) {
 
-		shipmentService.addShipment(shipment);
-
+		shipmentService.getShipment(id);
 		return new ResponseEntity<>(null);
 	}
 
 	@PutMapping("/shipment")
 	public ResponseEntity<Object> updateShipment(@RequestBody Shipment shipment) {
 		shipmentService.updateShipment(shipment);
-
-		return new ResponseEntity<>(null);
-	}
-
-	@DeleteMapping("/shipment/{id}")
-	public ResponseEntity<Object> deleteShipment(@PathVariable Long id) {
-		shipmentService.deleteShipment(id);
 
 		return new ResponseEntity<>(null);
 	}

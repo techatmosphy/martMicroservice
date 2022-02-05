@@ -16,18 +16,13 @@ public class CustomerServiceImpl implements CustomerService {
 	CustomerRepository CustomerRepository;
 
 	@Override
-	public void deleteCustomer(Long id) {
-		CustomerRepository.deleteById(id);
-	}
-
-	@Override
-	public Customer updateCustomer(Customer customer) {
-		return CustomerRepository.save(customer);
-	}
-
-	@Override
 	public Customer addCustomer(Customer customer) {
 		return CustomerRepository.save(customer);
+	}
+
+	@Override
+	public void deleteCustomer(Long id) {
+		CustomerRepository.deleteById(id);
 	}
 
 	@Override
@@ -38,5 +33,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> getCustomers() {
 		return CustomerRepository.findAll();
+	}
+
+	@Override
+	public Customer updateCustomer(Customer customer) {
+		return CustomerRepository.save(customer);
 	}
 }

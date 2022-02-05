@@ -16,17 +16,7 @@ public class OrderServiceImpl implements OrderService {
 	OrderRepository orderRepository;
 
 	@Override
-	public Optional<Order> getOrder(Long id) {
-		return orderRepository.findById(id);
-	}
-
-	@Override
 	public Order addOrder(Order order) {
-		return orderRepository.save(order);
-	}
-
-	@Override
-	public Order updateOrder(Order order) {
 		return orderRepository.save(order);
 	}
 
@@ -36,8 +26,18 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public Optional<Order> getOrder(Long id) {
+		return orderRepository.findById(id);
+	}
+
+	@Override
 	public List<Order> getOrders() {
 		return orderRepository.findAll();
+	}
+
+	@Override
+	public Order updateOrder(Order order) {
+		return orderRepository.save(order);
 	}
 
 }

@@ -2,6 +2,7 @@ package com.jdr.martMicroservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +15,25 @@ import com.jdr.martMicroservice.entity.User;
 import com.jdr.martMicroservice.service.UserService;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
 
 	@Autowired
 	UserService userService;
+
+	@PostMapping("/user")
+	public ResponseEntity<Object> addUser(@RequestBody User user) {
+
+		userService.addUser(user);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+
+	@DeleteMapping("/user/{id}")
+	public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
+
+		userService.deleteUser(id);
+		return new ResponseEntity<>(null);
+	}
 
 	@GetMapping("/user/{id}")
 	public ResponseEntity<Object> getUser(@PathVariable Long id) {
@@ -33,24 +49,10 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@PostMapping("/user")
-	public ResponseEntity<Object> addUser(@RequestBody User user) {
-
-		userService.addUser(user);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
 	@PutMapping("/user")
 	public ResponseEntity<Object> updateUser(@RequestBody User user) {
 
 		userService.updateUser(user);
 		return new ResponseEntity<>(HttpStatus.OK);
-	}
-
-	@DeleteMapping("/user/{id}")
-	public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
-
-		userService.deleteUser(id);
-		return new ResponseEntity<>(null);
 	}
 }

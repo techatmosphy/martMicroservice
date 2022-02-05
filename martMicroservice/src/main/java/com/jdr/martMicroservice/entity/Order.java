@@ -18,8 +18,7 @@ public class Order {
 	
 	private Long mobile;
 
-	public Long getId() {
-		return id;
+	public Order() {
 	}
 
 	public Long getMobile() {
@@ -30,24 +29,25 @@ public class Order {
 		this.mobile = mobile;
 	}
 
-	public void setId(Long id) {
+	public Order(Long id, String name) {
+		super();
 		this.id = id;
+		this.name = name;
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Order() {
-	}
-
-	public Order(Long id, String name) {
-		super();
+	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public void setName(String name) {
 		this.name = name;
 	}
 

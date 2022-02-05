@@ -10,11 +10,11 @@ public interface ShipmentService {
 
 	void deleteShipment(Long id);
 
-	Shipment updateShipment(Shipment shipment);
-
 	Optional<Shipment> getShipment(Long id);
 
 	List<Shipment> getShipments();
+
+	Shipment updateShipment(Shipment shipment);
 
 
 

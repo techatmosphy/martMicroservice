@@ -9,12 +9,12 @@ public interface OrderService {
 
 	Order addOrder(Order order);
 
-	Order updateOrder(Order order);
-
 	void deleteOrder(Long id);
 
 	Optional<Order> getOrder(Long id);
 
 	List<Order> getOrders();
+
+	Order updateOrder(Order order);
 
 }
