@@ -1,57 +1,89 @@
 package com.jdr.martMicroservice.controller;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jdr.martMicroservice.entity.Category;
+import com.jdr.martMicroservice.pojo.GenericResponse;
 import com.jdr.martMicroservice.service.CategoryService;
 
 @RestController
+@RequestMapping("/categories")
 public class CategoryController {
 
 	@Autowired
 	private CategoryService categoryService;
 
-	@GetMapping("/category/{id}")
-	public ResponseEntity<Object> getCategory(@PathVariable Long id) {
+	@GetMapping("/{id}")
+	public ResponseEntity<GenericResponse> getCategoryById(@PathVariable Long id) {
 
-		categoryService.getCategory(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Optional<Category> category = categoryService.getCategory(id);
+		GenericResponse response = new GenericResponse();
+		if(category.isPresent()) {
+		response.setMessage("Category retrieved successfully");
+		response.getData().add(category);
+		return new ResponseEntity<GenericResponse>(response,HttpStatus.OK);
+		}
+			response.setError("Category not fo successfully");
+		return new ResponseEntity<GenericResponse>(response,HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/category")
-	public ResponseEntity<Object> getAllCategory() {
+	@GetMapping
+	public ResponseEntity<GenericResponse> getAllCategory() {
 
-		categoryService.getAllCategory();
-		return new ResponseEntity<>(HttpStatus.OK);
+		List<Category> categories = categoryService.getAllCategory();
+		GenericResponse response = new GenericResponse();
+		response.setMessage("Categories retrieved successfully");
+		response.getData().addAll(categories);
+		return new ResponseEntity<GenericResponse>(response,HttpStatus.OK);
+		
 	}
 
-	@PostMapping("/category")
-	public ResponseEntity<Object> addCategory(@RequestBody Category category) {
+	@PostMapping
+	public ResponseEntity<GenericResponse> addCategory(@RequestBody Category category) {
 
-		categoryService.addCategory(category);
-		return new ResponseEntity<>(HttpStatus.OK);
+		Category cat = categoryService.addCategory(category);
+		GenericResponse response = new GenericResponse();
+		if(cat != null) {
+		response.setMessage("Category created successfully");
+		response.getData().add(category);
+		return new ResponseEntity<GenericResponse>(response,HttpStatus.CREATED);
+		}
+			response.setError("Error in creating cateogory ");
+		return new ResponseEntity<GenericResponse>(response,HttpStatus.NOT_FOUND);
 	}
 
 	@PutMapping
-	public ResponseEntity<Object> updateCategory(@RequestBody Category category) {
-
-		categoryService.updateCategory(category);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<GenericResponse> updateCategory(@RequestBody Category category) {
+		Category cat = categoryService.updateCategory(category);
+		GenericResponse response = new GenericResponse();
+		if(cat != null) {
+		response.setMessage("Category created successfully");
+		response.getData().add(category);
+		return new ResponseEntity<GenericResponse>(response,HttpStatus.OK);
+		}
+			response.setError("Error in creating cateogory ");
+		return new ResponseEntity<GenericResponse>(response,HttpStatus.NOT_FOUND);
 	}
 
-	@DeleteMapping("/category/{id}")
-	public ResponseEntity<Object> deleteCategory(@PathVariable Long id) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<GenericResponse> deleteCategoryById(@PathVariable Long id) {
 
 		categoryService.deleteCategory(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+		GenericResponse response = new GenericResponse();
+		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 }

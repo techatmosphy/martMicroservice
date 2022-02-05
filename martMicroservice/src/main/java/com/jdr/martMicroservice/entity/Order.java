@@ -15,9 +15,19 @@ public class Order {
 	private Long id;
 
 	private String name;
+	
+	private Long mobile;
 
 	public Long getId() {
 		return id;
+	}
+
+	public Long getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(Long mobile) {
+		this.mobile = mobile;
 	}
 
 	public void setId(Long id) {
