@@ -33,8 +33,8 @@ public class Product extends BaseObject {
 	@Column(name = "quantity", nullable = false)
 	private int quantity;
 
-//    @Column(name = "product_code", nullable = false)
-//    private String productCode;
+    @Column(name = "product_code", nullable = false)
+    private String productCode;
 
 	@Column(name = "gtin", nullable = false)
 	private int gtin;
@@ -70,6 +70,10 @@ public class Product extends BaseObject {
 
 	@Column(name = "lastUpdatedBy", nullable = true)
 	private String lastUpdatedBy;
+	
+	
+	@Column(name = "stock_count", nullable = true)
+	private Long stockCount;
 
 	public Product() {
 	}
@@ -215,4 +219,21 @@ public class Product extends BaseObject {
 		this.validTill = validTill;
 	}
 
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
+
+	public Long getStockCount() {
+		return stockCount;
+	}
+
+	public void setStockCount(Long stockCount) {
+		this.stockCount = stockCount;
+	}
+
+	
 }

@@ -12,50 +12,75 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jdr.martMicroservice.bean.GenericResponse;
+import com.jdr.martMicroservice.bean.ProductRequest;
 import com.jdr.martMicroservice.entity.Product;
 import com.jdr.martMicroservice.service.ProductService;
 
 @RestController
-
+@RequestMapping("/products")
 public class ProductContoller {
 
 	@Autowired
 	ProductService productService;
 
-	@PostMapping("/product")
-	public ResponseEntity<Object> addProduct(@RequestBody Product product) {
-
-		productService.addProduct(product);
-		return new ResponseEntity<>(HttpStatus.OK);
+	@PostMapping
+	public ResponseEntity<GenericResponse> addProduct(@RequestBody ProductRequest productRequest) {
+		Product prod = productService.addProduct(productRequest);
+		GenericResponse response = new GenericResponse();
+		if (prod != null) {
+			response.setMessage("Product created successfully");
+			response.getData().add(prod);
+			return new ResponseEntity<GenericResponse>(response, HttpStatus.CREATED);
+		}
+		response.setError("Error in creating cateogory ");
+		return new ResponseEntity<GenericResponse>(response, HttpStatus.NOT_FOUND);
 	}
 
-	@DeleteMapping("/product/{id}")
-	public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
+	@DeleteMapping("/{id}")
+	public ResponseEntity<GenericResponse> deleteProduct(@PathVariable Long id) {
 
 		productService.deleteProduct(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+		GenericResponse response = new GenericResponse();
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@GetMapping("/product/{id}")
-	public ResponseEntity<Object> getProduct(@PathVariable Long id) {
-
+	@GetMapping("/{id}")
+	public ResponseEntity<GenericResponse> getProduct(@PathVariable Long id) {
 		Optional<Product> product = productService.getProduct(id);
-		return new ResponseEntity<>(product, HttpStatus.OK);
+		GenericResponse response = new GenericResponse();
+		if (product.isPresent()) {
+			response.setMessage("Product retrieved successfully");
+			response.getData().add(product);
+			return new ResponseEntity<GenericResponse>(response, HttpStatus.OK);
+		}
+		response.setError("Product not found for id : " + id);
+		return new ResponseEntity<GenericResponse>(response, HttpStatus.NOT_FOUND);
 	}
 
-	@GetMapping("/product")
-	public ResponseEntity<Object> getProducts() {
+	@GetMapping
+	public ResponseEntity<GenericResponse> getProducts() {
+		List<Product> products = productService.getProducts();
+		GenericResponse response = new GenericResponse();
+		response.setMessage("Products retrieved successfully");
+		response.getData().addAll(products);
+		return new ResponseEntity<GenericResponse>(response, HttpStatus.OK);
 
-		List<Product> productList = productService.getProducts();
-		return new ResponseEntity<>(productList, HttpStatus.OK);
 	}
 
-	@PutMapping("/product")
-	public ResponseEntity<Object> updateProduct(@RequestBody Product product) {
-
-		productService.updateProduct(product);
-		return new ResponseEntity<>(HttpStatus.OK);
+	@PutMapping
+	public ResponseEntity<GenericResponse> updateProduct(@RequestBody Product product) {
+		Product prod = productService.updateProduct(product);
+		GenericResponse response = new GenericResponse();
+		if (prod != null) {
+			response.setMessage("Product updated successfully");
+			response.getData().add(prod);
+			return new ResponseEntity<GenericResponse>(response, HttpStatus.CREATED);
+		}
+		response.setError("Error in updated cateogory ");
+		return new ResponseEntity<GenericResponse>(response, HttpStatus.NOT_FOUND);
 	}
 }

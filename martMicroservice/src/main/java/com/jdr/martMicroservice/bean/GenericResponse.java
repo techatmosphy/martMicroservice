@@ -1,4 +1,4 @@
-package com.jdr.martMicroservice.pojo;
+package com.jdr.martMicroservice.bean;
 
 import java.util.ArrayList;
 import java.util.List;

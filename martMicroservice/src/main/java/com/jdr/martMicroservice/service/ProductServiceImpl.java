@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.jdr.martMicroservice.bean.ProductRequest;
+import com.jdr.martMicroservice.entity.Category;
 import com.jdr.martMicroservice.entity.Product;
+import com.jdr.martMicroservice.exception.CategoryNotFoundException;
 import com.jdr.martMicroservice.repo.ProductRepository;
 
 @Service
@@ -16,9 +19,26 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	ProductRepository productRepository;
+	
+	@Autowired
+	CategoryService categoryService;
 
 	@Override
-	public Product addProduct(@RequestBody Product product) {
+	public Product addProduct(ProductRequest productRequest) {
+		Long categoryId =productRequest.getCategoryId();
+		Optional<Category> category = categoryService.getCategory(categoryId);
+		if(! category.isPresent()) {
+			throw new CategoryNotFoundException("Category not found with Id :"+categoryId);
+		}
+
+		Product product = new Product();
+		product.setName(productRequest.getName());
+		product.setPrice(productRequest.getPrice());
+		product.setDescription(productRequest.getDescription());
+		product.setProductCode(productRequest.getName());
+		product.setStockCount(12l);
+		product.setCategory(category.get());
+		
 		return productRepository.save(product);
 	}
 

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jdr.martMicroservice.bean.GenericResponse;
 import com.jdr.martMicroservice.entity.Category;
-import com.jdr.martMicroservice.pojo.GenericResponse;
 import com.jdr.martMicroservice.service.CategoryService;
 
 @RestController
@@ -36,7 +36,7 @@ public class CategoryController {
 			response.getData().add(category);
 			return new ResponseEntity<GenericResponse>(response, HttpStatus.OK);
 		}
-		response.setError("Category not fo successfully");
+		response.setError("Category not found for id : "+id);
 		return new ResponseEntity<GenericResponse>(response, HttpStatus.NOT_FOUND);
 	}
 
@@ -69,11 +69,11 @@ public class CategoryController {
 		Category cat = categoryService.updateCategory(category);
 		GenericResponse response = new GenericResponse();
 		if (cat != null) {
-			response.setMessage("Category created successfully");
+			response.setMessage("Category updated successfully");
 			response.getData().add(category);
 			return new ResponseEntity<GenericResponse>(response, HttpStatus.OK);
 		}
-		response.setError("Error in creating cateogory ");
+		response.setError("Error in updating cateogory ");
 		return new ResponseEntity<GenericResponse>(response, HttpStatus.NOT_FOUND);
 	}
 
