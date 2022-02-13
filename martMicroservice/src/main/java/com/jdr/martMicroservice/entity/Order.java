@@ -1,9 +1,15 @@
 package com.jdr.martMicroservice.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +23,12 @@ public class Order {
 	private String name;
 	
 	private Long mobile;
-
+	
+	private Double totalAmount;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = FetchType.EAGER)
+	private Set<Product> products = new HashSet<>();
+	
 	public Order() {
 	}
 
@@ -51,4 +62,21 @@ public class Order {
 		this.name = name;
 	}
 
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+
+	public Double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(Double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	
 }

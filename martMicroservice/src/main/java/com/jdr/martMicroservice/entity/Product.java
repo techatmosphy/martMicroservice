@@ -10,8 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "product")
@@ -37,7 +41,7 @@ public class Product extends BaseObject {
     private String productCode;
 
 	@Column(name = "gtin", nullable = false)
-	private int gtin;
+	private Long gtin;
 
 	@Column(name = "offerId", nullable = false)
 	private int offerId;
@@ -74,11 +78,16 @@ public class Product extends BaseObject {
 	
 	@Column(name = "stock_count", nullable = true)
 	private Long stockCount;
+	
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "order_product", joinColumns = @JoinColumn(name = "productId", referencedColumnName = "productId"), inverseJoinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
+	@JsonIgnoreProperties("products")
+	private Order order;
 
 	public Product() {
 	}
 
-	public Product(Long productId, String name, String description, Double price, int quantity, int gtin, int offerId,
+	public Product(Long productId, String name, String description, Double price, int quantity, Long gtin, int offerId,
 			String brand, Category category, Date createdDate, Date updatedDate, Date validFrom, Date validTill,
 			String createdBy, String lastUpdatedBy) {
 		super();
@@ -119,7 +128,7 @@ public class Product extends BaseObject {
 		return description;
 	}
 
-	public int getGtin() {
+	public Long getGtin() {
 		return gtin;
 	}
 
@@ -179,7 +188,7 @@ public class Product extends BaseObject {
 		this.description = description;
 	}
 
-	public void setGtin(int gtin) {
+	public void setGtin(Long gtin) {
 		this.gtin = gtin;
 	}
 
@@ -233,6 +242,14 @@ public class Product extends BaseObject {
 
 	public void setStockCount(Long stockCount) {
 		this.stockCount = stockCount;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	

@@ -15,7 +15,15 @@ public interface ProductService {
 
 	List<Product> getProducts();
 
-	Product updateProduct(Product product);
+	Product updateProduct(ProductRequest product);
+	
+	void updateGtin(Long productId, Long gtin);
+	
+	Product getProductByGtin(Long gtin);
+	
+	void deleteAll();
+	
+	
 
 	
 }

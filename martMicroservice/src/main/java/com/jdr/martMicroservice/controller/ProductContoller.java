@@ -72,8 +72,8 @@ public class ProductContoller {
 	}
 
 	@PutMapping
-	public ResponseEntity<GenericResponse> updateProduct(@RequestBody Product product) {
-		Product prod = productService.updateProduct(product);
+	public ResponseEntity<GenericResponse> updateProduct(@RequestBody ProductRequest productRequest) {
+		Product prod = productService.updateProduct(productRequest);
 		GenericResponse response = new GenericResponse();
 		if (prod != null) {
 			response.setMessage("Product updated successfully");
@@ -82,5 +82,26 @@ public class ProductContoller {
 		}
 		response.setError("Error in updated cateogory ");
 		return new ResponseEntity<GenericResponse>(response, HttpStatus.NOT_FOUND);
+	}
+	
+	@GetMapping("/gtin/{gtin}")
+	public ResponseEntity<GenericResponse> getProductByGtin(@PathVariable Long gtin) {
+		Product product = productService.getProductByGtin(gtin);
+		GenericResponse response = new GenericResponse();
+		if (product != null) {
+			response.setMessage("Product retrieved successfully");
+			response.getData().add(product);
+			return new ResponseEntity<GenericResponse>(response, HttpStatus.OK);
+		}
+		response.setError("Product not found for id : " + gtin);
+		return new ResponseEntity<GenericResponse>(response, HttpStatus.NOT_FOUND);
+	}
+	
+	@DeleteMapping()
+	public ResponseEntity<GenericResponse> deleteAllProducts() {
+
+		productService.deleteAll();
+		GenericResponse response = new GenericResponse();
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 }

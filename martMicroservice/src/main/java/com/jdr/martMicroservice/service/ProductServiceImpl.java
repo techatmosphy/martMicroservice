@@ -60,8 +60,47 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product updateProduct(@RequestBody Product product) {
+	public Product updateProduct(ProductRequest productRequest) {
+		Long categoryId =productRequest.getCategoryId();
+		Optional<Category> category = categoryService.getCategory(categoryId);
+		if(! category.isPresent()) {
+			throw new CategoryNotFoundException("Category not found with Id :"+categoryId);
+		}
+
+		Product product = new Product();
+		product.setName(productRequest.getName());
+		product.setPrice(productRequest.getPrice());
+		product.setDescription(productRequest.getDescription());
+		product.setProductCode(productRequest.getName());
+		product.setStockCount(12l);
+		product.setCategory(category.get());
+		
 		return productRepository.save(product);
 	}
 
+	@Override
+	public void updateGtin(Long productId, Long gtin) {
+		Optional<Product> productOpt = productRepository.findById(productId);
+		if(! productOpt.isPresent()) {
+			throw new CategoryNotFoundException("Product not found with Id :"+productId);
+		}
+		
+		Product product = productOpt.get();
+		product.setGtin(gtin);
+		productRepository.save(product);
+		
+	}
+
+	@Override
+	public Product getProductByGtin(Long gtin) {
+		// TODO Auto-generated method stub
+		return productRepository.findProductByGtin(gtin);
+	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		productRepository.deleteAll();
+	}
+  
 }
