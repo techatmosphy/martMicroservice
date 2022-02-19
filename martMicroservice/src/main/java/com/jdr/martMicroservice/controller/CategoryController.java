@@ -82,6 +82,7 @@ public class CategoryController {
 
 		categoryService.deleteCategory(id);
 		GenericResponse response = new GenericResponse();
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		response.setMessage("category deleted successfully");
+		return new ResponseEntity<GenericResponse>(response, HttpStatus.OK);
 	}
 }
